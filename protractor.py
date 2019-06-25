@@ -96,6 +96,7 @@ class Protractor(QLabel):
         self.setAttribute(Qt.WA_TranslucentBackground, True)
         # self.setAttribute(Qt.WA_TransparentForMouseEvents)
         self.setStyleSheet("QLabel#angle { font-size: 20px; background-color: white; padding: 2px; }")
+        self.setCursor(Qt.OpenHandCursor)
         self.handleC = Handle(self)
         self.handle1 = Handle(self)
         self.handle2 = Handle(self)
@@ -111,6 +112,7 @@ class Protractor(QLabel):
         self.updateDisplay()
 
     def mousePressEvent(self, event):
+        self.setCursor(Qt.ClosedHandCursor)
         self.offset = event.pos()
         event.accept()
 
@@ -121,6 +123,9 @@ class Protractor(QLabel):
         self.offset = event.pos()
         self.updateDisplay()
         event.accept()
+
+    def mouseReleaseEvent(self, event):
+        self.setCursor(Qt.OpenHandCursor)
 
     def mouseDoubleClickEvent(self, event):
         self.angleInvert = not self.angleInvert
